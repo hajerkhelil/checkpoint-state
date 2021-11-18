@@ -8,20 +8,14 @@ class App extends React.Component {
 
  
  
-  state={toggle: false,date:new Date()  }
+  state={toggle: false,count:0 }
   handletoggle=()=>{  this.setState({ toggle: !this.state.toggle  })   }
 
 
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(),1000 );}
+    this.timerID = setInterval(() =>     this.setState({count: this.state.count+1 })    ,1000 );}
 
-      tick() {
-        this.setState({
-          date: new Date()
-        });
-      }
-
- 
+    
 
    render(){
 
@@ -29,7 +23,13 @@ class App extends React.Component {
       <div>
   
         <button   onClick={this.handletoggle} >    { this.state.toggle ? "hide" :"show" }    </button>
-        {this.state.toggle  ?  <Profile/>  :null}
+        {this.state.toggle  ? 
+        
+        <>
+        <Profile/>   
+        <h1>{this.state.count} </h1>
+        </>
+        :null}
 
       </div>
     )
